@@ -37,15 +37,14 @@ class LoginContainer extends Component {
         "Please check if your user name or password were empty."
       );
 
-    fetch("http://localhost:3001/login", {
+    fetch("https://us-central1-forest-network-dack.cloudfunctions.net/api/login", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        user: username,
-        pwd: password
+        publickey: public_key
       })
     })
       .then(resp => resp.json())
@@ -54,7 +53,7 @@ class LoginContainer extends Component {
           this.handleLogInSucceed(data);
         } else {
           message.error(
-            "Login failed. Please check your username and password."
+            "Login failed. Please check your secretkey."
           );
         }
       })
