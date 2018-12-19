@@ -8,8 +8,7 @@ class LoginContainer extends Component {
     super();
     this.state = {
       redirectToReferrer: false,
-      username: "",
-      password: "",
+      puclickey: "",
       showMessageLoginFailed: 0
     };
   }

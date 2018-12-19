@@ -8,8 +8,8 @@ class LoginContainer extends Component {
     super();
     this.state = {
       redirectToReferrer: false,
-      username: "",
-      password: "",
+      name: "",
+      publickey: "",
       showMessageLoginFailed: 0
     };
   }
@@ -31,10 +31,10 @@ class LoginContainer extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { username, password } = this.state;
-    if (username.length < 1 || password.length < 1)
+    const { name, publickey } = this.state;
+    if (name.length < 1 || publickey.length < 1)
       return message.warning(
-        "Please check if your user name or password were empty."
+        "...."
       );
 
     fetch("https://us-central1-forest-network-dack.cloudfunctions.net/api/register", {
