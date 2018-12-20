@@ -16,6 +16,11 @@
     "react-scripts": "1.1.5",
     "react-toggle-button": "^2.2.0",
     "reactstrap": "^6.5.0",
+    "firebase": "^5.7.0",
+    "react-redux": "^4.4.5",
+    "recompose": "^0.30.0",
+    "redux": "^4.0.1",
+    "react-redux-firebase": "^2.2.5",
     "w3-css": "^4.1.0"
   },
   "scripts": {
