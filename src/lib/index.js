@@ -6,6 +6,10 @@ const base32 = require('base32.js');
 const Followings = vstruct([
     { name: 'addresses', type: vstruct.VarArray(vstruct.UInt16BE, vstruct.Buffer(35)) },
 ]);
+const PlainTextContent = vstruct([
+    { name: 'type', type: vstruct.UInt8 },
+    { name: 'text', type: vstruct.VarString(vstruct.UInt16BE) },
+]);
 
 function doPost(etx) {
     const body = {
@@ -95,4 +99,23 @@ function updateAccount(account, privateKey, key, value) {
     return doPost(etx);
 }
 
-module.exports = { createAccount, payment, updateAccount }
+function post(account, privateKey, content) {
+    if (!privateKey)
+        return false;
+    const sequence = account.sequence + 1;
+    const tx = {
+        version: 1,
+        operation: 'post',
+        memo: Buffer.alloc(0),
+        params: {
+            keys: [],
+            content: PlainTextContent.encode({type: 1, text: content}),
+        },
+        sequence,
+    }
+    sign(tx, privateKey);
+    const etx = encode(tx).toString('base64');
+    return doPost(etx);
+}
+
+module.exports = { createAccount, payment, updateAccount, post }
