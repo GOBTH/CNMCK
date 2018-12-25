@@ -1,17 +1,11 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import './Signup.css';
-import axios from 'axios';
-const { Keypair } = require('stellar-base');
 class Pictures extends React.Component {
   constructor(props){
     super(props);
     this.state ={
-      check: false,
-      show: false,
-      username: '',
-      secretkey: '',
-      publickey: ''
+      username: ''
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -20,27 +14,8 @@ class Pictures extends React.Component {
     this.setState({[e.target.name]: e.target.value});
   }
   onSubmit(e){
-   
-    if(this.state.username != ''){
-      e.preventDefault();
-      const key = Keypair.random();
-      this.setState({
-        show: true,
-        publickey: key.publicKey(),
-        secretkey: key.secret()
-      });
-      console.log(key.secret());
-      console.log(key.publicKey());
-      console.log(this.state);
-      axios.post("https://us-central1-forest-network-dack.cloudfunctions.net/api/register",{
-        name: this.state.username,
-      });
-    }else{
-      e.preventDefault();
-      this.setState({
-        check: true
-      });
-    }
+    e.preventDefault();
+    console.log(this.state);
   }
   render() {
     return (
@@ -49,39 +24,23 @@ class Pictures extends React.Component {
         <div class="container">
         <div class="row">
             <div class="col-md-4 login-sec">
-                <h2 class="text-center">Sign Up</h2>
+                <h2 class="text-center">Those are your public key and secret key, please save it</h2>
       <form class="login-form" onSubmit={this.onSubmit}>
   
       <div class="form-group">
-        <label for="exampleInputEmail1" class="text-uppercase">YOUR NAME</label>
-        <input id = "username" name = "username" type="text" class="form-control" value={this.state.username} onChange={this.onChange.bind(this)} placeholder=""/> 
-        {this.state.check?
-          <div>
-            Username is required
-          </div>:null        
-        } 
+        <label for="exampleInputEmail1" class="text-uppercase">Public Key</label>
+        <input id = "publickey" name = "publickey" type="text" class="form-control" value={this.state.username} onChange={this.onChange.bind(this)} placeholder=""/> 
+        <label for="exampleInputEmail1" class="text-uppercase">Secret Key</label>
+        <input id = "secretkey" name = "secretkey" type="text" class="form-control" value={this.state.username} onChange={this.onChange.bind(this)} placeholder=""/>   
       </div>
       
     <div class="form-check">
         
         <button type="submit" class="btn btn-login float-right">Submit</button>
       </div>
-      {this.state.show?
-        <div>
-          <br/><br/>
-        <div class="form-group">
-        <label for="exampleInputEmail1" class="text-uppercase">Public Key</label>
-        <input id = "publickey" name = "publickey" type="text" class="form-control" value={this.state.puclickey} placeholder={this.state.publickey} readOnly/>  
-      </div>
-      <div class="form-group">
-      <label for="exampleInputEmail1" class="text-uppercase">Secret Key</label>
-      <input id = "secretkey" name = "secretkey" type="text" class="form-control" value={this.state.secretkey} placeholder={this.state.secretkey} readOnly/>  
-    </div>
-    <div class="copy-text"><i class="fa fa-heart"></i> Please <a href="./login">Login</a></div>
-    </div>:null
-      }
       
     </form>
+    <div class="copy-text">Created with <i class="fa fa-heart"></i> by TreeK</div>
             </div>
             <div class="col-md-8 banner-sec">
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

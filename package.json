@@ -8,6 +8,7 @@
     "mdbreact": "^4.8.1",
     "node-fetch": "^2.3.0",
     "react": "^16.5.2",
+    "react-axios": "^2.0.3",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.5.2",
     "react-grid-gallery": "^0.5.3",
@@ -22,6 +23,7 @@
     "reactstrap": "^6.5.0",
     "recompose": "^0.30.0",
     "redux": "^4.0.1",
+    "stellar-base": "^0.10.0",
     "w3-css": "^4.1.0"
   },
   "scripts": {
