@@ -8,10 +8,14 @@ import Infor from "./Information";
 class Pictures extends React.Component {
 
   render() {
-    const { users } = this.props;
+    const { users, posts } = this.props;
     const key = 'GAKXVIL35CL7QRBFIAXCYMOAV4JKD3QDWGRYJRMSWNRJWX7RL726IAOF';
-    if (users)
-      console.log(users[key]);
+    if (users) {
+      console.log(users[key].posts); //Trả về  mảng key
+      const postHash = users[key].posts[4]; //Lấy key thứ 4
+      if (posts)
+        console.log(posts[postHash].content); //Lấy ra nội dung, hoặc lấy comment, của 1 post trong danh sách trên.
+    }
     return (
       <div class="container-fluid">
         <div class="row">

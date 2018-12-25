@@ -5,9 +5,10 @@ import {
 import { firebaseConnect, withFirebase } from 'react-redux-firebase'
 import Home from './Home';
 export default compose(
-    firebaseConnect(['/users']),
+    firebaseConnect(['/users', '/posts']),
     connect(({ firebase }) => ({
         users: firebase.data.users,
+        posts: firebase.data.posts,
     })),
     withFirebase,
 )(Home);
