@@ -6,7 +6,7 @@ import Infor from './component/Infor';
 import Navbar from './component/CustomNavbar';
 import { Provider } from 'react-redux';
 import configureStore from './firebase/store'
-import Login from './component/Login/Login';
+import Login from './component/Login/LoginContainer';
 import Signup from './component/Sign up/Signup';
 const initialState = window.__INITIAL_STATE__ // set initial state here
 const store = configureStore(initialState)
