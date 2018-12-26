@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import './Login.css';
 import { Keypair } from 'stellar-base';
+import { connect } from 'react-redux'
 class Pictures extends React.Component {
   constructor(props) {
     super(props);
@@ -22,13 +23,15 @@ class Pictures extends React.Component {
       try {
         var keys = Keypair.fromSecret(this.state.secretkey);
         if (this.props.users[keys.publicKey()] != null) {
-          this.props.history.push('/');
+          this.props.setKey(this.state.secretkey, keys.publicKey());
+          this.props.history.push('/home');
         } else {
           this.setState({
             error: true
           });
         }
       } catch (e) {
+        console.log(e);
         this.setState({
           error: true
         });
@@ -121,4 +124,13 @@ class Pictures extends React.Component {
     );
   }
 }
-export default withRouter(Pictures);
+
+const mapDispatchToProps = (dispatch) => ({
+  setKey: (privateKey, publicKey) => dispatch({
+    type: 'setKey',
+    publicKey,
+    privateKey,
+  }),
+})
+
+export default connect(undefined, mapDispatchToProps)(withRouter(Pictures));

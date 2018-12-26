@@ -3,7 +3,7 @@ import {
     compose,
 } from 'recompose'
 import { firebaseConnect, withFirebase } from 'react-redux-firebase'
-import Home from '../Home';
+import Signup from './Signup';
 export default compose(
     firebaseConnect(['/users', '/posts']),
     connect(({ firebase }) => ({
@@ -11,4 +11,4 @@ export default compose(
         posts: firebase.data.posts,
     })),
     withFirebase,
-)(Home);
+)(Signup);
