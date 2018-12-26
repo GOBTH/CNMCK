@@ -5,7 +5,8 @@ import History from "./History";
 import Post from "./Post";
 import Write from "./WriteStatus";
 import Infor from "./Information";
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import Navbar from './CustomNavbar';
 class Pictures extends React.Component {
 
   render() {
@@ -21,11 +22,12 @@ class Pictures extends React.Component {
     }
     return (
       <div>
-        {this.props.islogin ?
+        {/* {this.props.islogin ?
           <div>
             {this.props.history.push('/login')}
           </div> : null
-        }
+        } */}
+        <Navbar />
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-3 offset-fixed f-left">

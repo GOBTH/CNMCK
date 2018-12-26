@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import './Signup.css';
+import Navbar from '../CustomNavbar';
 //import axios from 'axios';
 import create from '../../lib/index';
 class Pictures extends React.Component {
@@ -44,6 +45,7 @@ class Pictures extends React.Component {
   render() {
     return (
         <div>
+          <Navbar />
         <section class="login-block">
         <div class="container">
         <div class="row">

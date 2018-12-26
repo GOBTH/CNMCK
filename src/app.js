@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './app.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {
+    BrowserRouter,
+    Route,
+    Switch,
+  } from 'react-router-dom'
 import Home from './component/HomeContainer';
 import Infor from './component/Infor';
 import Navbar from './component/CustomNavbar';
@@ -14,15 +18,14 @@ class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <Router>
-                    <div>
-                        <Navbar />
+               <BrowserRouter>
+                    <Switch>
                         <Route exact path="/login" component={Login} />
                         <Route path="/invite" component={Signup} />
                         <Route path="/home" component={Home} />
                         <Route path="/infor" component={Infor} />
-                    </div>
-                </Router>
+                    </Switch>
+                </BrowserRouter>
             </Provider>
         );
     }
