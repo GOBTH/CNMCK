@@ -8,45 +8,50 @@ import Infor from "./Information";
 import { connect } from 'react-redux';
 import Navbar from './CustomNavbar';
 class Pictures extends React.Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLogin: false
+    }
+  }
+  componentDidMount() {
+    if(this.props.publicKey != null){
+      console.log(this.props.publicKey);
+      console.log(this.state.isLogin);
+      this.state.isLogin = true;
+    }
+  }
   render() {
     const { users, posts, islogin, privateKey, publicKey } = this.props;
-    const key = publicKey;
-    if (users) {
-      console.log(users[key].posts); //Trả về  mảng key
-      if (users[key].posts) {
-        const postHash = users[key].posts[0]; //Lấy key thứ 1
-        if (posts)
-          console.log(posts[postHash].content); //Lấy ra nội dung, hoặc lấy comment, của 1 post trong danh sách trên.
-      }
-    }
-    return (
-      <div>
-        {/* {this.props.islogin ?
-          <div>
-            {this.props.history.push('/login')}
-          </div> : null
-        } */}
-        <Navbar />
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-3 offset-fixed f-left">
-              <Infor />
-            </div>
-            <div class="col-lg-7 offset-lg-3">
-              <div class="row">
-                <div class="col-lg-8">
-                  <Write />
-                  <Post />
-                </div>
-                <History />
+    if (users)
+      return (
+        <div>
+          {this.props.islogin ?
+            <div>
+              {this.props.history.push('/login')}
+            </div> : null
+          }
+          <Navbar/>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-3 offset-fixed f-left">
+                <Infor account={users[publicKey]} />
               </div>
+              <div class="col-lg-7 offset-lg-3">
+                <div class="row">
+                  <div class="col-lg-8">
+                    <Write />
+                    <Post />
+                  </div>
+                  <History />
+                </div>
+              </div>
+              <List />
             </div>
-            <List />
           </div>
         </div>
-      </div>
-    );
+      );
+    return (<div><img src='https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif'></img></div>);
   }
 }
 
