@@ -1,3 +1,4 @@
+const axios = require('axios');
 const fetch = require('node-fetch');
 const { encode, sign } = require('./transaction');
 const vstruct = require('varstruct');
@@ -17,15 +18,18 @@ const ReactContent = vstruct([
 
 function doPost(etx) {
     const body = {
-        params: etx,
-    };
+        jsonrpc: "2.0",
+        method: "broadcast_tx_commit",
+        params: [etx],
+        id: "1"
+    }
     const option = {
-        method: 'POST',
+        method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
     };
-    return fetch('https://forest-network-dack.herokuapp.com/post', option).then(res => res.json())
-        .then(json => json);
+    fetch("https://komodo.forest.network", option);
+    return true;
 }
 
 function createAccount(account, privateKey, address) {

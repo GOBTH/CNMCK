@@ -34,7 +34,7 @@ class Status extends React.Component {
             </li>
             <li class="nav-item">
               <h3 class="nav-link" >
-                Followings: {account.followings ? account.followings.length : 0}
+                Followings: {account.followings.length}
               </h3>
             </li>
           </ul>

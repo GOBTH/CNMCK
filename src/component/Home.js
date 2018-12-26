@@ -8,19 +8,7 @@ import Infor from "./Information";
 import { connect } from 'react-redux';
 import Navbar from './CustomNavbar';
 class Pictures extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLogin: false
-    }
-  }
-  componentDidMount() {
-    if(this.props.publicKey != null){
-      console.log(this.props.publicKey);
-      console.log(this.state.isLogin);
-      this.state.isLogin = true;
-    }
-  }
+
   render() {
     const { users, posts, islogin, privateKey, publicKey } = this.props;
     if (users)

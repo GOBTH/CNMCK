@@ -1,6 +1,6 @@
 const initialState = {
-    publicKey: '',
-    privateKey: '',
+    publicKey: 'GAKXVIL35CL7QRBFIAXCYMOAV4JKD3QDWGRYJRMSWNRJWX7RL726IAOF',
+    privateKey: 'SCRODMRHQMYICWOWI7DADXOZLZDMPK34PXPYC7L6376VSXH7ODPHKUWM',
 }
 const keyReducer = (prevState = initialState, action) => {
     switch (action.type) {

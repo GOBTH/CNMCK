@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Navbar from './CustomNavbar';
 //import './photo.css';
+import Navbar from './CustomNavbar';
 
 export default class Home extends Component {
   render() {
     return (
-      <div> 
-          <Navbar />
+      <div>  
+          <Navbar/>
         {/* <div style="position:fixed;right:8px;top:8px;z-index:2000;border-radius:20px;padding:1px 4px;font-size:11px;background:rgba(255,255,255,0.8);font-family:monospace"><a target="edit" title="Edit code on Codeply" style="color:#192f42;" href="/go/N7lev0THyb">Edit on Codeply</a></div> */}
       <div class="container">
         <div class="row my-2">
