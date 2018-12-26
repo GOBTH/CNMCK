@@ -24,6 +24,7 @@
     "recompose": "^0.30.0",
     "redux": "^4.0.1",
     "stellar-base": "^0.10.0",
+    "varstruct": "^6.1.2",
     "w3-css": "^4.1.0"
   },
   "scripts": {

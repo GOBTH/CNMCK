@@ -1,8 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import './Login.css';
-import Keypair from 'stellar-base';
-import { errorForServerCode } from "@firebase/database/dist/src/core/util/util";
+import {Keypair} from 'stellar-base';
 class Pictures extends React.Component {
   constructor(props){
     super(props);
@@ -15,13 +14,13 @@ class Pictures extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   onChange(e){
-    this.setState({[e.target.secretkey]: e.target.value});
+    this.setState({[e.target.name]: e.target.value});
   }
   onSubmit(e){
     if(this.state.secretkey != ''){
       e.preventDefault();
-      var public= Keypair.fromSecret(this.state.secretkey);
-      if(user[public.publicKey()] != null)
+      var keys= Keypair.fromSecret(this.state.secretkey);
+      if(this.props.users[keys.publicKey()] != null)
       {
         this.context.router.push('/');
       }else{
@@ -37,7 +36,6 @@ class Pictures extends React.Component {
     }
   }
   render() {
-    const{check,show,secretkey} = this.state;
     return (
         <div>
         <section class="login-block">
@@ -48,7 +46,7 @@ class Pictures extends React.Component {
                 <form class="login-form" onSubmit={this.onSubmit}>
       <div class="form-group">
         <label for="exampleInputEmail1" class="text-uppercase">Secret Key</label>
-        <input id = "public_key" type="text" class="form-control" placeholder="" onChange={this.onChange}/> 
+        <input id = "secretkey" name = "secretkey" type="text" class="form-control"  value={this.state.secretkey} onChange={this.onChange.bind(this)} placeholder=""/> 
         {this.state.check?
           <div>
             Secret Key is required

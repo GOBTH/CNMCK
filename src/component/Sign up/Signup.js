@@ -1,9 +1,8 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import './Signup.css';
-import axios from 'axios';
-import create from '.../lib/index';
-const { Keypair } = require('stellar-base');
+//import axios from 'axios';
+import create from '../../lib/index';
 class Pictures extends React.Component {
   constructor(props){
     super(props);
@@ -16,11 +15,11 @@ class Pictures extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   onChange(e){
-    this.setState({[e.target.publickey]: e.target.value});
+    this.setState({[e.target.name]: e.target.value});
   }
   onSubmit(e){
    
-    if(this.state.publickey != ''){
+    if(this.state.publickey !== ''){
       e.preventDefault();
       // const key = Keypair.random();
       // this.setState({
@@ -34,7 +33,7 @@ class Pictures extends React.Component {
       // axios.post("https://us-central1-forest-network-dack.cloudfunctions.net/api/register",{
       //   name: this.state.username,
       // });
-      createAccount(user[key], key, this.state.publickey);
+      create.createAccount(this.props.users[this.props.key], this.props.key, this.state.publickey);
     }else{
       e.preventDefault();
       this.setState({
@@ -54,11 +53,11 @@ class Pictures extends React.Component {
   
       <div class="form-group">
         <label for="exampleInputEmail1" class="text-uppercase">YOUR FRIEND'S PUBLIC KEY</label>
-        <input id = "publickey" name = "usernamepublickey" type="text" class="form-control" value={this.state.publickey} onChange={this.onChange.bind(this)} placeholder=""/> 
+        <input id = "publickey" name = "publickey" type="text" class="form-control" value={this.state.publickey} onChange={this.onChange.bind(this)} placeholder=""/> 
         {this.state.check?
           <div>
             PUBLICKEY is required
-          </div>:<div>INVITE SUCCESSFULL </div> 
+          </div>:null
         } 
       </div>
       
