@@ -1,9 +1,43 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import './Login.css';
+import Keypair from 'stellar-base';
+import { errorForServerCode } from "@firebase/database/dist/src/core/util/util";
 class Pictures extends React.Component {
-  
+  constructor(props){
+    super(props);
+    this.state ={
+      check: false,
+      error: false,
+      secretkey: ''
+    }
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+  onChange(e){
+    this.setState({[e.target.secretkey]: e.target.value});
+  }
+  onSubmit(e){
+    if(this.state.secretkey != ''){
+      e.preventDefault();
+      var public= Keypair.fromSecret(this.state.secretkey);
+      if(user[public.publicKey()] != null)
+      {
+        this.context.router.push('/');
+      }else{
+        this.setState({
+          error: true
+        });
+      }
+    }else{
+      e.preventDefault();
+      this.setState({
+        check: true
+      });
+    }
+  }
   render() {
+    const{check,show,secretkey} = this.state;
     return (
         <div>
         <section class="login-block">
@@ -11,10 +45,20 @@ class Pictures extends React.Component {
         <div class="row">
             <div class="col-md-4 login-sec">
                 <h2 class="text-center">Login Now</h2>
-                <form class="login-form">
+                <form class="login-form" onSubmit={this.onSubmit}>
       <div class="form-group">
         <label for="exampleInputEmail1" class="text-uppercase">Secret Key</label>
-        <input id = "public_key" type="text" class="form-control" placeholder=""/>  
+        <input id = "public_key" type="text" class="form-control" placeholder="" onChange={this.onChange}/> 
+        {this.state.check?
+          <div>
+            Secret Key is required
+          </div>:null
+        } 
+        {this.state.error?
+          <div>
+            Secret Key is wrong
+          </div>:null
+        } 
       </div>
       
       
@@ -27,7 +71,6 @@ class Pictures extends React.Component {
       </div>
       
     </form>
-    <div class="copy-text">if this is the first time you come here, <i class="fa fa-heart"></i> please sign up at <a href="./signup">Sign Up</a></div>
             </div>
             <div class="col-md-8 banner-sec">
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

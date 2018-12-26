@@ -16,11 +16,14 @@ class CustomNavbar extends Component {
   render() {
     return (
       <div class="topnav">
-        <a eventKey={1} componentClass={Link} href="/" to="/">
+        <a eventKey={1} componentClass={Link} href="/home" to="/home">
           HOME    
         </a>
         <a eventKey={2} componentClass={Link} href="/infor" to="/infor">
           INFO
+        </a>
+        <a eventKey={2} componentClass={Link} href="/invite" to="/invite">
+          INVITE
         </a>
         <input
           id="search"

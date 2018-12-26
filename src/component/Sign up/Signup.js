@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import './Signup.css';
 import axios from 'axios';
+import create from '.../lib/index';
 const { Keypair } = require('stellar-base');
 class Pictures extends React.Component {
   constructor(props){
@@ -9,32 +10,31 @@ class Pictures extends React.Component {
     this.state ={
       check: false,
       show: false,
-      username: '',
-      secretkey: '',
       publickey: ''
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
   onChange(e){
-    this.setState({[e.target.name]: e.target.value});
+    this.setState({[e.target.publickey]: e.target.value});
   }
   onSubmit(e){
    
-    if(this.state.username != ''){
+    if(this.state.publickey != ''){
       e.preventDefault();
-      const key = Keypair.random();
-      this.setState({
-        show: true,
-        publickey: key.publicKey(),
-        secretkey: key.secret()
-      });
-      console.log(key.secret());
-      console.log(key.publicKey());
-      console.log(this.state);
-      axios.post("https://us-central1-forest-network-dack.cloudfunctions.net/api/register",{
-        name: this.state.username,
-      });
+      // const key = Keypair.random();
+      // this.setState({
+      //   show: true,
+      //   publickey: key.publicKey(),
+      //   secretkey: key.secret()
+      // });
+      // console.log(key.secret());
+      // console.log(key.publicKey());
+      // console.log(this.state);
+      // axios.post("https://us-central1-forest-network-dack.cloudfunctions.net/api/register",{
+      //   name: this.state.username,
+      // });
+      createAccount(user[key], key, this.state.publickey);
     }else{
       e.preventDefault();
       this.setState({
@@ -49,16 +49,16 @@ class Pictures extends React.Component {
         <div class="container">
         <div class="row">
             <div class="col-md-4 login-sec">
-                <h2 class="text-center">Sign Up</h2>
+                <h2 class="text-center">INVITE A NEW FRIEND</h2>
       <form class="login-form" onSubmit={this.onSubmit}>
   
       <div class="form-group">
-        <label for="exampleInputEmail1" class="text-uppercase">YOUR NAME</label>
-        <input id = "username" name = "username" type="text" class="form-control" value={this.state.username} onChange={this.onChange.bind(this)} placeholder=""/> 
+        <label for="exampleInputEmail1" class="text-uppercase">YOUR FRIEND'S PUBLIC KEY</label>
+        <input id = "publickey" name = "usernamepublickey" type="text" class="form-control" value={this.state.publickey} onChange={this.onChange.bind(this)} placeholder=""/> 
         {this.state.check?
           <div>
-            Username is required
-          </div>:null        
+            PUBLICKEY is required
+          </div>:<div>INVITE SUCCESSFULL </div> 
         } 
       </div>
       
@@ -66,20 +66,6 @@ class Pictures extends React.Component {
         
         <button type="submit" class="btn btn-login float-right">Submit</button>
       </div>
-      {this.state.show?
-        <div>
-          <br/><br/>
-        <div class="form-group">
-        <label for="exampleInputEmail1" class="text-uppercase">Public Key</label>
-        <input id = "publickey" name = "publickey" type="text" class="form-control" value={this.state.puclickey} placeholder={this.state.publickey} readOnly/>  
-      </div>
-      <div class="form-group">
-      <label for="exampleInputEmail1" class="text-uppercase">Secret Key</label>
-      <input id = "secretkey" name = "secretkey" type="text" class="form-control" value={this.state.secretkey} placeholder={this.state.secretkey} readOnly/>  
-    </div>
-    <div class="copy-text"><i class="fa fa-heart"></i> Please <a href="./login">Login</a></div>
-    </div>:null
-      }
       
     </form>
             </div>
