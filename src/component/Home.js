@@ -6,7 +6,7 @@ import Post from "./Post";
 import Write from "./WriteStatus";
 import Infor from "./Information";
 import { connect } from 'react-redux';
-import Navbar from './CustomNavbar';
+import Navbar from './CustomNavbarContainer';
 class Pictures extends React.Component {
 
   render() {

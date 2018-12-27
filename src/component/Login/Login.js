@@ -24,6 +24,9 @@ class Pictures extends React.Component {
         var keys = Keypair.fromSecret(this.state.secretkey);
         if (this.props.users[keys.publicKey()] != null) {
           this.props.setKey(this.state.secretkey, keys.publicKey());
+          const { token, refreshToken } = this.state;
+          localStorage.setItem('token', token);
+          localStorage.setItem('refreshToken', refreshToken);
           this.props.history.push('/home');
         } else {
           this.setState({

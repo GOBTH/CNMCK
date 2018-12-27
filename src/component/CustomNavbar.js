@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import './CustomNavbar.css';
+import { connect } from 'react-redux';
 
 class CustomNavbar extends Component {
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
   search = id => {
     if (id.key === "Enter") {
       const key = id.target.value
@@ -13,9 +18,14 @@ class CustomNavbar extends Component {
       window.location.reload();
     }
   };
+  onSubmit(e) {
+    e.preventDefault();
+    this.props.logout();
+    this.props.history.push('/login');
+  }
   render() {
     return (
-      <div class="topnav">
+      <form class="topnav" onSubmit={this.onSubmit} >
         <a eventKey={1} componentClass={Link} href="/home" to="/home">
           HOME    
         </a>
@@ -32,17 +42,21 @@ class CustomNavbar extends Component {
           placeholder="Search"
           onKeyPress={this.search}
         />
-        <a style={{float: 'right'}} eventKey={4} componentClass={Link} href="/login" to="/login">
+        <button style={{float: 'right'}} type='submit' componentClass={Link} >
           LOG OUT
-        </a>
-        {/* <ul>
-          <li><a class="active" href="#home">Home</a></li>
-          <li><a href="#news">News</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li style={{float: 'right'}}><a href="#about">About</a></li>
-        </ul> */}
-      </div>
+        </button>
+      </form>
     );
   }
 }
-export default withRouter(CustomNavbar);
+
+const mapStateToProps = (state) => ({
+  privateKey: state.keyReducer.privateKey,
+  publicKey: state.keyReducer.publicKey,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  logout: () => dispatch({ type: 'logout' }),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CustomNavbar));

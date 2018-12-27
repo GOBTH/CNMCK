@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import './Signup.css';
 import create from '../../lib/index';
 import { connect } from 'react-redux';
-import Navbar from '../CustomNavbar';
+import Navbar from '../CustomNavbarContainer';
 class Pictures extends React.Component {
   constructor(props) {
     super(props);

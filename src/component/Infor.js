@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 //import './photo.css';
-import Navbar from './CustomNavbar';
+import Navbar from './CustomNavbarContainer';
 
 export default class Home extends Component {
   render() {
